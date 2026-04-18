@@ -5,22 +5,17 @@ import { fileURLToPath } from 'url'
 
 let app = express()
 
-// fix __dirname
 let __filename = fileURLToPath(import.meta.url)
 let __dirname = path.dirname(__filename)
 
-// middleware
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(express.static("public"))
 
-
-// home route
 app.get("/", (req, res) => {
-    res.send("Server is running")
+    res.sendFile(__dirname + "/public/index.html")
 })
 
-
-// 🗄️ SCHEMA
 let userSchema = mongoose.Schema({
     name: String,
     phone: String,
@@ -31,17 +26,12 @@ let userSchema = mongoose.Schema({
     password: String   
 })
 
-// MODEL
 let User = mongoose.model("users", userSchema)
 
-
-// 🔌 CONNECT DATABASE (MongoDB Compass)
 mongoose.connect("mongodb://127.0.0.1:27017/agricultureDB")
 .then(() => console.log("Database connected"))
 .catch(err => console.log(err))
 
-
-// 📝 REGISTER
 app.post("/register", async (req, res) => {
 
     console.log("REGISTER DATA:", req.body)   
@@ -51,19 +41,15 @@ app.post("/register", async (req, res) => {
     if (!data.password || data.password.length !== 5) {
         return res.send("Password must be exactly 5 characters")
     }
-
-    // 🔴 ADMIN REGISTER
+    
     if (data.name && data.name.toLowerCase().trim() === "admin" && data.phone === "9999999999") {
 
         data.role = "admin"
-
-        // optional: clean unwanted fields
         data.farmSize = ""
         data.zone = ""
         data.address = ""
 
     } else {
-        // 🟢 FARMER REGISTER
         if (!data.phone || !data.address || !data.farmSize || !data.zone) {
             return res.send("All farmer fields are required")
         }
@@ -82,55 +68,53 @@ app.post("/register", async (req, res) => {
     res.send("User registered successfully")
 })
 
-
-// 🔐 LOGIN
 app.post("/login", async (req, res) => {
 
     let { name, phone, password, passkey } = req.body
 
-    // 🔴 ADMIN LOGIN
     if (name && name.toLowerCase().trim() === "admin") {
 
         let admin = await User.findOne({ phone: phone, role: "admin" })
 
         if (!admin) {
-            return res.send("Admin not found")
+            return res.json({ message: "Admin not found" })
         }
 
         if (admin.password !== password) {
-            return res.send("Incorrect password")
+            return res.json({ message: "Incorrect password" })
         }
 
         if (!passkey) {
-            return res.send("Passkey required")
+            return res.json({ message: "Passkey required" })
         }
 
         if (passkey !== "5463") {
-            return res.send("Invalid passkey")
+            return res.json({ message: "Invalid passkey" })
         }
 
-        return res.send({
+        return res.json({
             message: "Admin login successful",
             role: "admin",
-            name: admin.name
+            name: admin.name,
+            phone: admin.phone
         })
     }
 
-    // 🟢 FARMER LOGIN
     let user = await User.findOne({ phone: phone })
 
     if (!user) {
-        return res.send("User not found, please register")
+        return res.json({ message: "User not found" })
     }
 
     if (user.password !== password) {
-        return res.send("Incorrect password")
+        return res.json({ message: "Incorrect password" })
     }
 
-    return res.send({
+    return res.json({
         message: "Farmer login successful",
         role: "farmer",
-        name: user.name
+        name: user.name,
+        phone: user.phone
     })
 })
 
@@ -354,10 +338,6 @@ app.get("/getAnnouncements", async (req, res) => {
     res.send(data)
 })
 
-// ▶️ SERVER START
 app.listen(3000, () => {
     console.log("Server running on port 3000")
 })
-
-
-
