@@ -44,7 +44,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/agricultureDB")
 // 📝 REGISTER
 app.post("/register", async (req, res) => {
 
-    console.log("REGISTER DATA:", req.body)   // ✅ ADD THIS LINE
+    console.log("REGISTER DATA:", req.body)   
 
     let data = req.body
 
