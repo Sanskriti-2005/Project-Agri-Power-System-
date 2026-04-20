@@ -27,7 +27,6 @@ body {
     background: #f8fbf9;
 }
 
-/* NAVBAR */
 nav {
     position: fixed;
     width: 100%;
@@ -55,7 +54,6 @@ nav button {
     cursor: pointer;
 }
 
-/* HERO */
 .hero {
     height: 100vh;
     background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef') center/cover;
@@ -105,7 +103,6 @@ nav button {
     transform: scale(1.05);
 }
 
-/* FEATURES */
 .features {
     padding: 80px 8%;
     text-align: center;
@@ -134,13 +131,11 @@ nav button {
     transform: translateY(-10px);
 }
 
-/* ICON */
 .icon {
     font-size: 30px;
     margin-bottom: 10px;
 }
 
-/* CTA */
 .cta {
     background: var(--green);
     color: white;
@@ -158,13 +153,11 @@ nav button {
     cursor: pointer;
 }
 
-/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
 }
 
-/* ANIMATION */
 @keyframes fadeUp {
     from {
         opacity: 0;
@@ -209,7 +202,6 @@ footer {
     </div>
 </section>
 
-<!-- 🌾 FARMER DASHBOARD -->
 <section id="dashboard" style="display:none; padding:80px 8%;">
 
     <h2 style="margin-bottom:20px; color:#2d6a4f;">
@@ -230,7 +222,6 @@ footer {
 
     <div class="grid">
 
-        <!-- POWER -->
         <div class="card">
             <h3>⚡ Power Schedule</h3>
             <p>Zone: <b id="zone"></b></p>
@@ -238,19 +229,16 @@ footer {
             <p>End: <b id="end"></b></p>
         </div>
 
-        <!-- USAGE -->
         <div class="card">
             <h3>📊 Usage</h3>
             <p id="usage">Loading...</p>
         </div>
 
-        <!-- VOLTAGE -->
         <div class="card">
             <h3>🔌 Voltage</h3>
             <p id="voltage">Loading...</p>
         </div>
 
-        <!-- ANNOUNCEMENTS -->
         <div class="card">
             <h3>📢 Announcements</h3>
             <div id="announcements"></div>
@@ -258,7 +246,6 @@ footer {
 
     </div>
 
-    <!-- COMPLAINT -->
     <div class="card" style="margin-top:30px;">
         <h3>⚠️ Raise Complaint</h3>
         <textarea id="complaint" style="width:100%; padding:10px;"></textarea>
@@ -272,7 +259,6 @@ footer {
 
 </section>
 
-<!-- FEATURES -->
 <section class="features">
     <h2>Our Solutions</h2>
 
@@ -305,7 +291,6 @@ footer {
     </div>
 </section>
 
-<!-- CTA -->
 <section class="cta">
     <h2>Join the Future of Smart Farming</h2>
     <button onclick="window.location.href='/login.html'">Login Now</button>
@@ -318,7 +303,6 @@ footer {
 <script>
 let loggedInUser = null;
 
-// ✅ AUTO LOGIN
 window.onload = () => {
     let user = JSON.parse(localStorage.getItem("user"));
 
@@ -331,7 +315,6 @@ window.onload = () => {
     }
 };
 
-// 🎯 SHOW DASHBOARD
 function showDashboard() {
     document.querySelector(".hero").style.display = "none";
     document.querySelector(".features").style.display = "none";
@@ -340,7 +323,6 @@ function showDashboard() {
     document.getElementById("dashboard").style.display = "block";
 }
 
-// 📊 LOAD DATA
 async function loadDashboard() {
 
     let res = await fetch("/farmerDashboard", {
@@ -363,7 +345,6 @@ async function loadDashboard() {
     farmerNameEl.innerText = data.name;
     zoneEl.innerText = data.zone;
 
-    // ⚡ POWER SCHEDULE (FINAL FIX)
     if (data.power && data.power.startTime) {
         startEl.innerText = data.power.startTime;
         endEl.innerText = data.power.endTime;
@@ -372,28 +353,24 @@ async function loadDashboard() {
         endEl.innerText = "Not Set";
     }
 
-    // 📊 USAGE
     if (Array.isArray(data.usage) && data.usage.length > 0) {
         usageEl.innerText = data.usage[data.usage.length - 1].units + " units";
     } else {
         usageEl.innerText = "No data";
     }
 
-    // 🔌 VOLTAGE
     if (Array.isArray(data.voltage) && data.voltage.length > 0) {
         voltageEl.innerText = data.voltage[data.voltage.length - 1].voltage + " V";
     } else {
         voltageEl.innerText = "No data";
     }
 
-    // 📢 ANNOUNCEMENTS
     let a = await fetch("/getAnnouncements");
     let announcements = await a.json();
 
     document.getElementById("announcements").innerHTML =
         announcements.map(x => `<p>${x.date} - ${x.message}</p>`).join("");
 
-    // ⚠️ LOAD COMPLAINTS + REPLIES
     complaintListEl.innerHTML = data.complaints.map(c => `
         <div style="
             background:#f1fdf3;
@@ -408,7 +385,6 @@ async function loadDashboard() {
     `).join("");
 }
 
-// ⚠️ COMPLAINT
 async function sendComplaint() {
     let msg = document.getElementById("complaint").value;
 
@@ -427,7 +403,6 @@ async function sendComplaint() {
     loadDashboard(); 
 }
 
-// 🔓 LOGOUT
 function logout() {
     localStorage.removeItem("user");
     location.reload();
