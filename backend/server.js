@@ -13,8 +13,7 @@ let __dirname = path.dirname(__filename)
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(express.static("public"))
-
+app.use(express.static(path.join(__dirname, "public")))
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html")
 })
@@ -30,10 +29,9 @@ let userSchema = mongoose.Schema({
 })
 let User = mongoose.model("users", userSchema)
 
-mongoose.connect(process.env.MONGO_URI)
-// mongoose.connect("mongodb://127.0.0.1:27017/agricultureDB")
-// .then(() => console.log("Database connected"))
-// .catch(err => console.log(err))
+mongoose.connect("mongodb+srv://Sanskriti:Shona2005@cluster0.pnshuyn.mongodb.net/agricultureDB")
+.then(() => console.log("Database connected"))
+.catch(err => console.log(err))
 
 app.post("/register", async (req, res) => {
 
