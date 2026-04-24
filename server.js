@@ -2,6 +2,9 @@ import express from 'express'
 import mongoose from 'mongoose'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import cors from "cors";
+
+app.use(cors());
 
 let app = express()
 
@@ -338,6 +341,8 @@ app.get("/getAnnouncements", async (req, res) => {
     res.send(data)
 })
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000")
-})
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
+});
