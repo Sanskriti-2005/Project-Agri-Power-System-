@@ -2,6 +2,9 @@ import express from 'express'
 import mongoose from 'mongoose'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import cors from "cors";
+
+app.use(cors());
 
 let app = express()
 
@@ -25,7 +28,6 @@ let userSchema = mongoose.Schema({
     role: String,
     password: String   
 })
-fgh
 let User = mongoose.model("users", userSchema)
 
 mongoose.connect("mongodb://127.0.0.1:27017/agricultureDB")
@@ -338,6 +340,8 @@ app.get("/getAnnouncements", async (req, res) => {
     res.send(data)
 })
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000")
-})
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
+});

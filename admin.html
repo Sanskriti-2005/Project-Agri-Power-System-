@@ -74,7 +74,6 @@ button:hover {
 
 <div class="container">
 
-    <!-- 🔌 POWER -->
     <div class="card">
         <h2>Set Power Schedule</h2>
 
@@ -85,7 +84,6 @@ button:hover {
         <button onclick="setPower()">Update Power</button>
     </div>
 
-    <!-- 🔋 VOLTAGE -->
     <div class="card">
         <h2>Add Voltage</h2>
 
@@ -95,7 +93,6 @@ button:hover {
         <button onclick="addVoltage()">Add Voltage</button>
     </div>
 
-    <!-- 📊 USAGE -->
     <div class="card">
         <h2>Add Usage</h2>
 
@@ -106,7 +103,6 @@ button:hover {
         <button onclick="addUsage()">Add Usage</button>
     </div>
 
-    <!-- 📢 ANNOUNCEMENT -->
     <div class="card">
         <h2>Add Announcement</h2>
 
@@ -115,7 +111,6 @@ button:hover {
         <button onclick="addAnnouncement()">Add</button>
     </div>
 
-    <!-- ⚠️ COMPLAINTS -->
     <div class="card">
         <h2>Complaints</h2>
         <div id="complaints-container"></div>
@@ -134,7 +129,6 @@ if (!user || user.role !== "admin") {
 const API = ""
 const ADMIN_PHONE = "9999999999"
 
-// 🔌 POWER
 async function setPower() {
     let farmerPhoneVal = document.getElementById("p_farmer_phone").value;
     let startTimeVal = document.getElementById("startTime").value;
@@ -154,7 +148,6 @@ async function setPower() {
     alert(await res.text())
 }
 
-// 🔋 VOLTAGE
 async function addVoltage() {
     let farmerPhoneVal = document.getElementById("v_farmer_phone").value;
     let voltageVal = document.getElementById("voltage_value").value;
@@ -173,7 +166,6 @@ async function addVoltage() {
     alert(await res.text())
 }
 
-// 📊 USAGE
 async function addUsage() {
     let farmerPhoneVal = document.getElementById("farmer_phone").value;
     let unitsVal = document.getElementById("units").value;
@@ -193,7 +185,6 @@ async function addUsage() {
     alert(await res.text())
 }
 
-// 📢 ANNOUNCEMENT
 async function addAnnouncement() {
     let announcementVal = document.getElementById("announcement").value;
 
@@ -209,7 +200,6 @@ async function addAnnouncement() {
     alert(await res.text())
 }
 
-// ⚠️ LOAD COMPLAINTS
 async function loadComplaints() {
     let res = await fetch(`${API}/getComplaints`, {
         method: "POST",
@@ -237,7 +227,7 @@ async function loadComplaints() {
     })
 }
 
-// ✉️ REPLY
+
 async function replyComplaint(id) {
     let replyText = document.getElementById(`reply-${id}`).value
 
@@ -255,14 +245,12 @@ async function replyComplaint(id) {
     loadComplaints()
 }
 
-// 🔓 LOGOUT
 function logout() {
     localStorage.removeItem("user")
     alert("Logged out")
     window.location.href = "/login.html"
 }
 
-// INIT
 loadComplaints()
 </script>
 
