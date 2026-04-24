@@ -4,9 +4,9 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import cors from "cors";
 
-app.use(cors());
-
 let app = express()
+
+app.use(cors());
 
 let __filename = fileURLToPath(import.meta.url)
 let __dirname = path.dirname(__filename)
@@ -30,9 +30,10 @@ let userSchema = mongoose.Schema({
 })
 let User = mongoose.model("users", userSchema)
 
-mongoose.connect("mongodb://127.0.0.1:27017/agricultureDB")
-.then(() => console.log("Database connected"))
-.catch(err => console.log(err))
+mongoose.connect(process.env.MONGO_URI)
+// mongoose.connect("mongodb://127.0.0.1:27017/agricultureDB")
+// .then(() => console.log("Database connected"))
+// .catch(err => console.log(err))
 
 app.post("/register", async (req, res) => {
 
