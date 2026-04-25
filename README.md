@@ -1,9 +1,11 @@
-🌾 AgriPower – Smart Power Distribution System
+<img width="134" height="51" alt="image" src="https://github.com/user-attachments/assets/a97b4708-737b-445e-948f-93486ef046d6" />
+
+## 🌾 AgriPower – Smart Power Distribution System
 
 AgriPower is a full-stack web application designed to improve electricity distribution for farmers. 
 It provides real-time tracking of power schedules, voltage, and usage, along with an admin panel to manage and monitor the system efficiently.
 
-🚀 Features :-
+## 🚀 Features :-
 
 👨‍🌾 Farmer
 * Register and login
@@ -21,7 +23,7 @@ It provides real-time tracking of power schedules, voltage, and usage, along wit
 * View and reply to complaints
 * Post announcements
   
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 * **Frontend**: HTML, CSS, JavaScript
 * **Backend:** Node.js, Express.js
@@ -32,7 +34,7 @@ It provides real-time tracking of power schedules, voltage, and usage, along wit
 
 ---
 
-📂 Project Structure
+## 📂 Project Structure
 
 ```
 agriculture/
@@ -50,7 +52,7 @@ agriculture/
 |
 
 ```
-🌐 Deployment
+## 🌐 Deployment
 
 Backend (Render)
 
