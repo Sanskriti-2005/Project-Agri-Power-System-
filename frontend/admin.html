@@ -77,7 +77,7 @@ button:hover {
     <div class="card">
         <h2>Set Power Schedule</h2>
 
-        <input type="text" id="p_farmer_phone" placeholder="Farmer Phone">
+        <input type="text" id="zone_input" placeholder="Zone (e.g. North)">
         <input type="time" id="startTime">
         <input type="time" id="endTime">
 
@@ -87,7 +87,7 @@ button:hover {
     <div class="card">
         <h2>Add Voltage</h2>
 
-        <input type="text" id="v_farmer_phone" placeholder="Farmer Phone">
+        <input type="text" id="v_zone" placeholder="Zone (e.g. North)">
         <input type="number" id="voltage_value" placeholder="Voltage (e.g. 220)">
 
         <button onclick="addVoltage()">Add Voltage</button>
@@ -130,7 +130,7 @@ const API = "https://agripower-1aco.onrender.com"
 const ADMIN_PHONE = "9999999999"
 
 async function setPower() {
-    let farmerPhoneVal = document.getElementById("p_farmer_phone").value;
+    let zoneVal = document.getElementById("zone_input").value;
     let startTimeVal = document.getElementById("startTime").value;
     let endTimeVal = document.getElementById("endTime").value;
 
@@ -139,7 +139,7 @@ async function setPower() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             phone: ADMIN_PHONE,
-            zone: farmerPhoneVal,
+            zone: zoneVal,
             startTime: startTimeVal,
             endTime: endTimeVal
         })
@@ -149,7 +149,7 @@ async function setPower() {
 }
 
 async function addVoltage() {
-    let farmerPhoneVal = document.getElementById("v_farmer_phone").value;
+    let zoneVal = document.getElementById("v_zone").value;
     let voltageVal = document.getElementById("voltage_value").value;
 
     let res = await fetch(`${API}/addVoltage`, {
@@ -157,7 +157,7 @@ async function addVoltage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             phone: ADMIN_PHONE,
-            zone: farmerPhoneVal,
+            zone: zoneVal,
             voltage: voltageVal,
             date: new Date().toLocaleDateString()
         })
