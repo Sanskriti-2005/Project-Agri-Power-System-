@@ -188,8 +188,8 @@ footer {
 <nav>
     <div class="logo">AgriPower</div>
     <div>
-        <button onclick="window.location.href='/login.html'">Login</button>
-        <button onclick="window.location.href='/register.html'" style="background:transparent; border:1px solid var(--green); color:var(--green); margin-left:10px;">Register</button>
+        <button onclick="window.location.href='login.html'">Login</button>
+        <button onclick="window.location.href='register.html'" style="background:transparent; border:1px solid var(--green); color:var(--green); margin-left:10px;">Register</button>
     </div>
 </nav>
 
@@ -302,6 +302,7 @@ footer {
 
 <script>
 let loggedInUser = null;
+const API = "https://agripower-1aco.onrender.com";
 
 window.onload = () => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -325,7 +326,7 @@ function showDashboard() {
 
 async function loadDashboard() {
 
-    let res = await fetch("/farmerDashboard", {
+    let res = await fetch(`${API}/farmerDashboard`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ phone: loggedInUser.phone })
@@ -365,7 +366,7 @@ async function loadDashboard() {
         voltageEl.innerText = "No data";
     }
 
-    let a = await fetch("/getAnnouncements");
+    let a = await fetch(`${API}/getAnnouncements`);
     let announcements = await a.json();
 
     document.getElementById("announcements").innerHTML =
@@ -388,7 +389,7 @@ async function loadDashboard() {
 async function sendComplaint() {
     let msg = document.getElementById("complaint").value;
 
-    await fetch("/addComplaint", {
+    await fetch(`${API}/addComplaint`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

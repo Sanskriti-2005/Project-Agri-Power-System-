@@ -191,13 +191,14 @@ button:hover {
 
     </form>
 
-    <p class="switch" onclick="window.location.href='/login.html'">
+    <p class="switch" onclick="window.location.href='login.html'">
         Already have an account? Login here
     </p>
 
 </div>
 
 <script>
+const API = "https://agripower-1aco.onrender.com"; 
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -211,7 +212,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     };
 
     try {
-        let res = await fetch("/register", {
+        let res = await fetch(`${API}/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -221,7 +222,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
         alert(result);
 
         if (result.includes("successfully")) {
-            window.location.href = "/login.html";
+            window.location.href = "login.html";
         }
     } catch (err) {
         console.error(err);

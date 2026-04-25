@@ -123,10 +123,10 @@ let user = JSON.parse(localStorage.getItem("user"))
 
 if (!user || user.role !== "admin") {
     alert("Unauthorized access")
-    window.location.href = "/login.html"
+    window.location.href = "login.html"
 }
 
-const API = ""
+const API = "https://agripower-1aco.onrender.com"
 const ADMIN_PHONE = "9999999999"
 
 async function setPower() {
@@ -139,7 +139,7 @@ async function setPower() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             phone: ADMIN_PHONE,
-            farmerPhone: farmerPhoneVal,
+            zone: farmerPhoneVal,
             startTime: startTimeVal,
             endTime: endTimeVal
         })
@@ -157,7 +157,7 @@ async function addVoltage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             phone: ADMIN_PHONE,
-            farmerPhone: farmerPhoneVal,
+            zone: farmerPhoneVal,
             voltage: voltageVal,
             date: new Date().toLocaleDateString()
         })
@@ -248,7 +248,7 @@ async function replyComplaint(id) {
 function logout() {
     localStorage.removeItem("user")
     alert("Logged out")
-    window.location.href = "/login.html"
+    window.location.href = "login.html"
 }
 
 loadComplaints()
