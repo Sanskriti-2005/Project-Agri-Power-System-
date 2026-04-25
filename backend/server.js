@@ -43,7 +43,7 @@ app.post("/register", async (req, res) => {
         return res.send("Password must be exactly 5 characters")
     }
     
-    if (data.name && data.name.toLowerCase().trim() === "admin" && data.phone === "9999999999") {
+    if (data.name && data.name.toLowerCase().trim() === "admin" && data.phone === "9932270404") {
 
         data.role = "admin"
         data.farmSize = ""
@@ -209,7 +209,7 @@ app.post("/addComplaint", async (req, res) => {
 
 // ------------------- SET POWER -------------------
 app.post("/setPower", async (req, res) => {
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -231,7 +231,7 @@ app.post("/setPower", async (req, res) => {
 // ------------------- ADD USAGE (ADMIN) -------------------
 app.post("/addUsage", async (req, res) => {
 
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -247,7 +247,7 @@ app.post("/addUsage", async (req, res) => {
 // ------------------- ADD VOLTAGE (ADMIN) -------------------
 app.post("/addVoltage", async (req, res) => {
 
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -258,7 +258,7 @@ app.post("/addVoltage", async (req, res) => {
 
 // ------------------- GET ALL FARMERS -------------------
 app.post("/getFarmers", async (req, res) => {
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -270,7 +270,7 @@ app.post("/getFarmers", async (req, res) => {
 // ------------------- GET FARMER USAGE -------------------
 app.post("/getFarmerUsage", async (req, res) => {
 
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -283,7 +283,7 @@ app.post("/getFarmerUsage", async (req, res) => {
 
 // ------------------- GET COMPLAINTS -------------------
 app.post("/getComplaints", async (req, res) => {
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -295,7 +295,7 @@ app.post("/getComplaints", async (req, res) => {
 // ------------------- REPLY TO COMPLAINT -------------------
 app.post("/replyComplaint", async (req, res) => {
 
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
@@ -319,7 +319,7 @@ let Announcement = mongoose.model("announcements", announcementSchema)
 // ------------------- ADD ANNOUNCEMENT -------------------
 app.post("/addAnnouncement", async (req, res) => {
 
-    if (req.body.phone !== "9999999999") {
+    if (req.body.phone !== "9932270404") {
         return res.send("Only admin allowed")
     }
 
