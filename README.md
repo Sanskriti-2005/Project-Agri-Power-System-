@@ -80,7 +80,7 @@ Frontend (Vercel)
 ---
 
 ## 📸 Screenshots
-<img width="1877" height="904" alt="Screenshot 2026-04-25 201045" src="https://github.com/user-attachments/assets/4884dbc1-ff97-4b5e-8ffe-99b2da72095c" />
+<img width="1877" height="904" alt="Screenshot 2026-04-25 201045" src="https://github.com/user-attachments/assets/4884dbc1-ff97-4b5e-8ffe-99b2da72095c" /><br>
 
 <img width="1875" height="902" alt="Screenshot 2026-04-25 201105" src="https://github.com/user-attachments/assets/8b9919b3-a0a2-4e6e-86aa-66278191f6b4" />
 
