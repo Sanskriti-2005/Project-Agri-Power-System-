@@ -66,6 +66,8 @@ Frontend (Vercel)
 * Hosted using static hosting
 * Connected with backend API using Render URL
 
+  Deployment Link :-  agripower-three.vercel.app
+
 ---
 
 ## 🔑 Default Admin Access
